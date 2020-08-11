@@ -1,12 +1,8 @@
 package dev.moratelli
 
-import java.lang.IllegalArgumentException
-
-class Meeting {
+class Meeting(val meetingName: String, val location: Location = Location("")) {
 
     private val logger = Logger()
-    val meetingName: String = ""
-
 
     fun addParticipant(participant: Participant) {
         if(verifyParticipants(participant))
@@ -23,21 +19,6 @@ class Meeting {
     }
 }
 
-class Participant {
-    var name: Name = Name()
-    var email = ""
+class Location(val address: String) {
 
-    val participantName
-        get() = name.name
-
-    val canonicalEmail
-        get() = email.toUpperCase()
-}
-
-class Name {
-    var name : String = ""
-        set(value: String) {
-            if(value.isNullOrBlank()) throw IllegalArgumentException()
-            field = value;
-        }
 }
