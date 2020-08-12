@@ -1,8 +1,18 @@
 package dev.moratelli
 
+import java.nio.file.Paths
+
 fun main() {
-    val meeting = Meeting("Review", BrAddress("R. dos Gatos, 30", "Casa 2", "Florianópolis", "SC", "88000-000"))
-    val review = PersonalReview("Review Meeting", Participant(Name("Alice"), ""), listOf(), Room("Room 1"))
+    val postCode = USZipCode("12345")
+
+    val logger: Logger = FileLogger(Paths.get("/some/file.log"))
+
+    val meeting = Meeting("Review",
+        UkAddress("R. dos Gatos, 30", "Casa 2", "Florianópolis", "SC", UKPostCode("")), logger
+    )
+    val review = PersonalReview("Review Meeting", Participant(Name("Alice"), ""), listOf(),
+        Room("Room 1"), logger
+    )
 
     println("Created: $review with name ${review.meetingName} and at ${review.locationName}")
     val name = Name("Pedro Moratelli")

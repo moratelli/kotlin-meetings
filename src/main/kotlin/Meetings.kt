@@ -1,14 +1,15 @@
 package dev.moratelli
 
-open class Meeting(val meetingName: String, open val location: Location = Location()) {
+import java.nio.file.Paths
 
-    private val logger = Logger()
+open class Meeting(val meetingName: String, open val location: Location, val logger: Logger) {
 
     open val locationName = ""
 
     fun addParticipant(participant: Participant) {
+        logger.info("Participant added")
         if(verifyParticipants(participant))
-        println("Added: ${participant.participantName}")
+            println("Added: ${participant.participantName}")
     }
 
     private fun verifyParticipants(participant: Participant) : Boolean {
@@ -21,7 +22,7 @@ open class Meeting(val meetingName: String, open val location: Location = Locati
     }
 }
 
-class PersonalReview(meetingName: String, val employee: Participant, reviewers: List<Participant>, override val location: Room) : Meeting(meetingName, location){
+class PersonalReview(meetingName: String, val employee: Participant, reviewers: List<Participant>, override val location: Room, logger: Logger) : Meeting(meetingName, location, logger){
 
     override val locationName
         get() = location.roomName
